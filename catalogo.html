@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Catálogo - Velocity</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d6cf2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101722",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+    <div class="relative w-full overflow-x-hidden">
+        <!-- Header / Navigation -->
+        <header
+            class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 bg-black/20 backdrop-blur-md border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+                <div class="flex items-center gap-12">
+                    <a href="index.html" class="flex items-center gap-3 text-white">
+                        <div class="size-8 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-black uppercase tracking-tighter">Velocity</h1>
+                    </a>
+                    <nav class="hidden lg:flex items-center gap-8">
+                        <a class="text-primary text-sm font-semibold uppercase tracking-wider underline underline-offset-8"
+                            href="catalogo.html">Catálogo</a>
+                    </nav>
+                </div>
+                <div class="flex items-center gap-6">
+
+                    <div class="flex items-center gap-4">
+                        <a href="carrito.html" class="relative p-2 text-white hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                            <span id="cart-count"
+                                class="absolute -top-1 -right-1 bg-primary text-white text-[10px] size-5 rounded-full flex items-center justify-center font-bold">0</span>
+                        </a>
+                        <a href="login.html" id="user-link"
+                            class="flex items-center gap-2 p-2 text-white hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined">person</span>
+                            <span id="user-name-label" class="text-xs font-bold uppercase tracking-widest">Iniciar
+                                sesión</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="bg-white dark:bg-background-dark py-32 px-6 lg:px-10">
+            <div class="max-w-7xl mx-auto">
+                <!-- Catalog Header & Filters -->
+                <div
+                    class="flex flex-col mb-12 gap-8 bg-slate-50 dark:bg-white/5 p-8 rounded-3xl border border-slate-100 dark:border-white/10">
+                    <!-- Row 1: Title and Subtitle -->
+                    <div class="flex flex-col gap-1">
+                        <span class="text-primary font-bold uppercase tracking-[0.2em] text-xs">Colección Completa ·
+                            <span id="product-count">...</span> productos</span>
+                        <h3 class="text-4xl font-black dark:text-white uppercase tracking-tight">Catálogo de Productos
+                        </h3>
+                    </div>
+
+                    <!-- Row 2: Search and Filters -->
+                    <div class="flex flex-col lg:flex-row items-center gap-4 w-full">
+                        <!-- Search -->
+                        <div class="relative flex-grow lg:max-w-xl w-full">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                            <input id="search-input" type="text" placeholder="Buscar por nombre..."
+                                class="w-full pl-12 pr-6 py-3 bg-white dark:bg-background-dark border border-slate-200 dark:border-white/10 rounded-full text-sm focus:ring-primary focus:border-primary shadow-sm">
+                        </div>
+
+                        <!-- Filters Group -->
+                        <div
+                            class="flex items-center gap-3 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
+                            <!-- Category Filter -->
+                            <div class="relative shrink-0">
+                                <select id="category-filter"
+                                    class="pl-6 pr-12 py-3 bg-white dark:bg-background-dark border border-slate-200 dark:border-white/10 rounded-full text-sm focus:ring-primary focus:border-primary appearance-none cursor-pointer bg-none">
+                                    <option value="all">Todas las Categorías</option>
+                                </select>
+                                <span
+                                    class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+                            </div>
+
+                            <!-- Sort Filter -->
+                            <div class="relative shrink-0">
+                                <select id="sort-filter"
+                                    class="pl-6 pr-12 py-3 bg-white dark:bg-background-dark border border-slate-200 dark:border-white/10 rounded-full text-sm focus:ring-primary focus:border-primary appearance-none cursor-pointer bg-none">
+                                    <option value="newest">Más Recientes</option>
+                                    <option value="price-low">Precio: Menor a Mayor</option>
+                                    <option value="price-high">Precio: Mayor a Menor</option>
+                                    <option value="name-asc">Nombre: A - Z</option>
+                                    <option value="name-desc">Nombre: Z - A</option>
+                                </select>
+                                <span
+                                    class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">sort</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="products-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+                    <!-- Products rendered by app.js -->
+                    <div class="col-span-full py-20 text-center">
+                        <div
+                            class="animate-spin size-10 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4">
+                        </div>
+                        <p class="text-slate-400 font-medium">Sincronizando con Supabase...</p>
+                    </div>
+                </div>
+
+                <!-- Quality Section -->
+                <section class="py-24 border-t border-slate-100 dark:border-white/10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                        <div class="relative rounded-3xl overflow-hidden aspect-video shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1000&auto=format&fit=crop"
+                                alt="Calidad Superior" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+                        </div>
+                        <div>
+                            <span class="text-primary font-bold uppercase tracking-widest text-xs">Nuestro ADN</span>
+                            <h3
+                                class="text-5xl font-black dark:text-white uppercase tracking-tighter mt-4 mb-8 leading-none">
+                                Calidad Sin Excusas</h3>
+                            <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mb-10">
+                                Cada fibra, cada costura y cada suela ha sido diseñada para resistir las condiciones más
+                                extremas. En Velocity, no solo vendemos ropa; ofrecemos herramientas de alto rendimiento
+                                para atletas que se atreven a desafiar lo imposible.
+                            </p>
+                            <div class="flex gap-8">
+                                <div class="flex flex-col">
+                                    <span class="text-3xl font-black text-primary">100%</span>
+                                    <span
+                                        class="text-xs uppercase font-bold text-slate-400 tracking-widest">Garantía</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-3xl font-black text-primary">Elite</span>
+                                    <span
+                                        class="text-xs uppercase font-bold text-slate-400 tracking-widest">Materiales</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-black text-white pt-20 pb-10 px-6 lg:px-10 border-t border-white/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                    <div class="md:col-span-1">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="size-8 text-primary">
+                                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-xl font-black uppercase tracking-tighter">Velocity</h2>
+                        </div>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                            Redefiniendo el potencial atlético a través de la innovación radical y el diseño de élite.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Explorar</h4>
+                        <ul class="flex flex-col gap-4 text-slate-500 text-sm">
+                            <li><a href="index.html" class="hover:text-primary transition-colors">Inicio</a></li>
+                            <li><a href="catalogo.html" class="hover:text-primary transition-colors">Catálogo</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Sobre Nosotros</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Seguridad</h4>
+                        <ul class="flex flex-col gap-4 text-slate-500 text-sm">
+                            <li><a href="#" class="hover:text-primary transition-colors">Privacidad</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Términos</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Contacto</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Síguenos</h4>
+                        <div class="flex items-center gap-4 text-slate-500">
+                            <a href="#" class="hover:text-primary transition-all"><span
+                                    class="material-symbols-outlined">public</span></a>
+                            <a href="#" class="hover:text-primary transition-all"><span
+                                    class="material-symbols-outlined">share</span></a>
+                            <a href="#" class="hover:text-primary transition-all"><span
+                                    class="material-symbols-outlined">alternate_email</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-white/10 gap-4">
+                    <p class="text-slate-600 text-[10px] uppercase tracking-widest">© 2026 Velocity Performance Apparel.
+                        Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/catalogo.js"></script>
+</body>
+
+</html>
